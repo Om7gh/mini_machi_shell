@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/21 18:17:03 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:53:32 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,32 @@
 volatile sig_atomic_t	g_exit_stts;
 
 /* FUNCTIONS */
+t_tokenizer	*make_node(char *input, int *j, t_lexer *type, t_stat *stat);
+t_tokenizer	*token_word(char *input, t_lexer *type, int *i);
+t_tokenizer	*sub_redirection(char *input, t_lexer *type, \
+	int *i, int j, t_stat *stat);
+t_tokenizer	*token_special_char(char *input, t_lexer *type, int *i);
+int			check_dquotes(t_stat **stat, char *input, int *i, int *j);
+int			check_squotes(t_stat **stat, char *input, int *i, int *j);
+void		process_dollar_question(char *token, int *i, char **join_it, \
+				t_minishell *mini);
 int			process(t_minishell *mini, t_cmd *cmds, int input, int output);
 int			check_word_input(char c);
 void		print_state(t_stat stat);
 int			execute_builtin(t_minishell *mini, t_cmd *cmd);
-int			red_process(t_minishell *mini, t_cmd *cmds, int imput, int output);
+int			red_process(t_minishell *mini, t_cmd *cmds, int input, int output);
 int			is_builtins(t_cmd *cmds);
 int			execute_single_commande(t_minishell *mini, t_cmd *cmd);
 char		**env_to_array(t_env *env_list);
 int			multi_process(t_minishell *mini, t_cmd *cmds);
 char		*env_join(char const *s1, char const *s2);
 int			single_process(t_minishell *mini, t_cmd *cmds);
-char		**env_to_array(t_env *env_list);
 int			node_len(t_cmd *cmds);
 int			my_execve(t_minishell *mini, t_cmd *cmds);
 char		*find_cmd(t_minishell *mini, char *cmd);
 int			execution(t_minishell *mini, t_cmd *cmds);
 void		del_one_env(t_env *lst, void (*del)(void *));
 void		handle_sigint(int sig);
-void		handle_sigquit(int sig);
 t_env		*new_env(char *key, char *value);
 void		append_env(t_env **env, t_env *node);
 char		*get_values(t_env **env, char *key);
@@ -59,7 +66,7 @@ int			echo(t_cmd *cmd);
 int			cd(t_cmd *cmd, t_env *env);
 int			unset(t_cmd *token, t_env **env);
 void		send_to_execution(t_tokenizer *token, t_cmd **cmd);
-void		count_len(t_tokenizer *lst, int *commands_len,
+void		count_len(t_tokenizer *lst, int *commands_len, \
 				int *redirection_len);
 void		clear_cmd(t_cmd **cmd, void (*del)(void *));
 void		del_one_cmd(t_cmd *cmds, void (*del)(void *));
@@ -71,9 +78,9 @@ int			here_doc(t_tokenizer *delimiter, t_minishell *mini);
 char		*expansion(char *token, t_minishell *mini);
 int			store_env(char **envr, t_env **env);
 t_tokenizer	*check_signle_quotes(char *input, int *i, t_lexer *type, \
-		t_stat *stat);
+				t_stat *stat);
 t_tokenizer	*check_double_quotes(char *input, int *i, t_lexer *type, \
-		t_stat *stat);
+				t_stat *stat);
 t_tokenizer	*make_node(char *input, int *j, t_lexer *type, t_stat *stat);
 t_tokenizer	*new_token(void *content, t_lexer *type, t_stat *stat);
 void		print_token(t_tokenizer *token);
@@ -87,11 +94,8 @@ void		append_token(t_tokenizer **tokens, t_tokenizer *token);
 int			ft_isspace(char c);
 int			is_special(int c);
 
-// signals
-
+/* SIGNALS */
 void		handle_sigint(int sig);
-void		handle_sigquit(int sig);
-void		quit_hundler(int sig);
 void		set_sigs(void);
 int			getexstatus(int stts);
 void		reset_sigs(void);

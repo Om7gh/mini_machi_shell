@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:49 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/21 18:14:00 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:46:39 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_signal				t_signal;
 typedef struct s_env				t_env;
 typedef struct s_cmd				t_cmd;
 typedef struct s_expansion			t_expantion;
-typedef struct s_propre				t_propre;
 typedef enum e_lexer				t_lexer;
 typedef enum e_stat					t_stat;
 
@@ -50,12 +49,6 @@ struct s_cmd
 	struct s_cmd	*next;
 };
 
-struct s_propre
-{
-	char			*str;
-	struct s_propre	*next;
-};
-
 struct s_minishell
 {
 	t_tokenizer		*start;
@@ -65,6 +58,7 @@ struct s_minishell
 	t_env			*secret_env;
 	t_cmd			*cmd;
 	char			*line;
+	char			**envirement;
 	int				**pipe;
 	int				infile;
 	int				fdin;
@@ -73,6 +67,7 @@ struct s_minishell
 	int				ret_value;
 	int				here_cpy;
 	int				exit;
+	int				count;
 };
 
 struct	s_signal

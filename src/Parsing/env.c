@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 11:45:21 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/21 17:29:12 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:51:09 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@ t_env	*new_env(char *key, char *value)
 {
 	t_env	*head;
 
-	head = (t_env *)malloc(sizeof(t_env));
-	if (!head)
-		return (NULL);
-	head->value = value;
-	head->key = key;
+	head = o_malloc(sizeof(t_env));
+	if (value)
+		head->value = ft_strdup(value);
+	else
+		head->value = NULL;
+	if (key)
+		head->key = ft_strdup(key);
+	else
+		head->key = NULL;
 	head->next = NULL;
 	return (head);
 }
@@ -73,7 +77,9 @@ int	store_env(char **envr, t_env **env)
 	char	**each_env;
 
 	i = 0;
-	while (envr[i])
+	if (!envr)
+		return (0);
+	while (envr && envr[i])
 	{
 		each_env = ft_split(envr[i], '=');
 		if (!each_env)

@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 06:08:52 by omghazi           #+#    #+#             */
-/*   Updated: 2024/05/26 17:50:33 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/26 15:56:55 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_tokenizer	*new_token(void *content, t_lexer *type, t_stat *stat)
 {
 	t_tokenizer	*head;
 
-	head = (t_tokenizer *)malloc(sizeof(t_tokenizer));
+	head = o_malloc(sizeof(t_tokenizer));
 	if (!head)
 		return (NULL);
 	head->token = content;

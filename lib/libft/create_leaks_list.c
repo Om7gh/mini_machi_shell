@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   create_leaks_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 13:11:31 by ialdidi           #+#    #+#             */
-/*   Updated: 2024/05/28 10:26:10 by omghazi          ###   ########.fr       */
+/*   Created: 2024/08/26 09:25:49 by omghazi           #+#    #+#             */
+/*   Updated: 2024/08/26 16:03:20 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+t_propre	*create_addr(void *addr)
 {
-	t_list	*last;
+	t_propre	*new;
 
-	if (!lst)
-		return ;
-	if (!*lst)
-		*lst = new;
-	else
+	new = (t_propre *)malloc(sizeof(t_propre));
+	new->addr = addr;
+	new->next = NULL;
+	return (new);
+}
+
+void	append_address(t_propre **head, void *addr)
+{
+	t_propre	*new;
+	t_propre	*last;
+
+	new = create_addr(addr);
+	if (!*head)
 	{
-		last = ft_lstlast(*lst);
-		last->next = new;
-		new->previous = last;
+		*head = new;
+		return ;
 	}
+	last = *head;
+	while (last->next)
+		last = last->next;
+	last->next = new;
 }

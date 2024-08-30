@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ialdidi <ialdidi@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 12:41:54 by ialdidi           #+#    #+#             */
-/*   Updated: 2023/11/12 07:43:43 by ialdidi          ###   ########.fr       */
+/*   Created: 2023/11/05 15:16:02 by omghazi           #+#    #+#             */
+/*   Updated: 2024/08/26 16:16:32 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	strs = (char **)ft_calloc(count_words(s, c) + 1, sizeof(char *));
-	if (!strs)
-		return (NULL);
+	strs = o_malloc(count_words(s, c) + 1 * sizeof(char *));
 	return (split(strs, s, c));
 }

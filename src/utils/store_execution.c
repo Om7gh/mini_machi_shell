@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:44:36 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/21 17:26:55 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:23:18 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ t_cmd	*new_cmd(int cmd, int red)
 {
 	t_cmd	*new;
 
-	new = malloc(sizeof(t_cmd));
-	if (!new)
-		NULL;
-	new->cmd = malloc(sizeof(char *) * (cmd + 1));
-	new->red = malloc(sizeof(char *) * (red + 1));
+	new = o_malloc(sizeof(t_cmd));
+	new->cmd = o_malloc(sizeof(char *) * (cmd + 1));
+	new->red = o_malloc(sizeof(char *) * (red + 1));
 	new->cmd[cmd] = NULL;
 	new->red[red] = NULL;
 	new->next = NULL;

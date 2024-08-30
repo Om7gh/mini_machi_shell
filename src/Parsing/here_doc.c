@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:48 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/21 17:35:05 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/29 14:50:45 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,10 @@ void	here_hundle(int sig)
 	}
 }
 
-int	here_doc(t_tokenizer *delimiter, t_minishell *mini)
+void	here_doc_hundle(t_tokenizer *delimiter, t_minishell *mini)
 {
 	char	*input;
 
-	mini->fdin = open("/tmp/ana_machi_heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (mini->fdin == -1)
-		return (perror("open"), 0);
-	mini->here_cpy = dup(0);
 	while (1)
 	{
 		signal(SIGINT, here_hundle);
@@ -44,7 +40,18 @@ int	here_doc(t_tokenizer *delimiter, t_minishell *mini)
 			input = expansion(input, mini);
 		write(mini->fdin, input, ft_strlen(input));
 		write(mini->fdin, "\n", 1);
+		free(input);
 	}
+}
+
+int	here_doc(t_tokenizer *delimiter, t_minishell *mini)
+{
+	mini->fdin = open("/tmp/ana_machi_heredoc", \
+		O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (mini->fdin == -1)
+		return (perror("open"), 0);
+	mini->here_cpy = dup(0);
+	here_doc_hundle(delimiter, mini);
 	if (g_exit_stts == 6)
 		mini->ret_value = 1;
 	dup2(mini->here_cpy, 0);

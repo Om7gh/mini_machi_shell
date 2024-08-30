@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 14:20:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/21 17:35:31 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/29 21:01:51 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ t_tokenizer	*check_signle_quotes(char *input, int *i, t_lexer *type, \
 			(*i)++;
 		if (input[*i] == '\'')
 		{
-			(*i)++;
-			if (input[*i] == '\'')
-				return (printf("error with single quotes\n"), NULL);
-			while (input[*i] && !check_word_input(input[*i]))
-				(*i)++;
 			*stat = INQUOTES;
 			s = ft_substr(input, k, *i);
 			node = new_token(s, type, stat);
@@ -57,11 +52,6 @@ t_tokenizer	*check_double_quotes(char *input, int *i, t_lexer *type, \
 			(*i)++;
 		if (input[*i] == '"')
 		{
-			(*i)++;
-			if (input[*i] == '"')
-				return (printf("error with single quotes\n"), NULL);
-			while (input[*i] && !check_word_input(input[*i]))
-				(*i)++;
 			*stat = INDQUOTES;
 			s = ft_substr(input, k, *i);
 			node = new_token(s, type, stat);
@@ -75,4 +65,34 @@ t_tokenizer	*check_double_quotes(char *input, int *i, t_lexer *type, \
 int	ft_isspace(char c)
 {
 	return (c == ' ' || c == '\t');
+}
+
+int	check_squotes(t_stat **stat, char *input, int *i, int *j)
+{
+	**stat = INQUOTES;
+	(*i)++;
+	while (input[*i] && input[*i] != '\'')
+	{
+		(*j)++;
+		(*i)++;
+	}
+	if (input[*i] != '\'')
+		return (printf("error with single quotes\n"), 0);
+	(*j)++;
+	return (1);
+}
+
+int	check_dquotes(t_stat **stat, char *input, int *i, int *j)
+{
+	**stat = INDQUOTES;
+	(*i)++;
+	while (input[*i] && input[*i] != '"')
+	{
+		(*j)++;
+		(*i)++;
+	}
+	if (input[*i] != '"')
+		return (printf("error with double quotes\n"), 0);
+	(*j)++;
+	return (1);
 }

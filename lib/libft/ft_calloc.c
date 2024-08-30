@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ialdidi <ialdidi@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 08:55:58 by ialdidi           #+#    #+#             */
-/*   Updated: 2023/11/11 08:56:31 by ialdidi          ###   ########.fr       */
+/*   Created: 2023/11/15 21:26:56 by omghazi           #+#    #+#             */
+/*   Updated: 2023/11/20 11:02:29 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*ptr;
+	char	*ptr;
+	size_t	total_case;
 
-	if (count && size && count > (4294967295 / size))
+	if (count > 0 && SIZE_MAX / count < size)
 		return (NULL);
-	ptr = malloc(count * size);
+	total_case = count * size;
+	ptr = malloc(total_case);
 	if (!ptr)
 		return (NULL);
-	ft_bzero(ptr, count * size);
+	ft_bzero(ptr, total_case);
 	return (ptr);
 }

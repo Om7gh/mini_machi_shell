@@ -3,32 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ialdidi <ialdidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 08:55:36 by ialdidi           #+#    #+#             */
-/*   Updated: 2024/03/09 15:35:51 by ialdidi          ###   ########.fr       */
+/*   Created: 2023/11/14 03:35:08 by omghazi           #+#    #+#             */
+/*   Updated: 2023/11/20 12:36:45 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	num_sign(const char **s)
+{
+	int	sign;
+
+	sign = 1;
+	if (**s == '-' || **s == '+')
+	{
+		if (**s == '-')
+			sign *= -1;
+		(*s)++;
+	}
+	return (sign);
+}
+
 int	ft_atoi(const char *str)
 {
-	long	num;
+	long	res;
+	long	tmp;
 	int		sign;
 
-	num = 0;
-	sign = 1;
-	while (*str == 32 || (*str >= 9 && *str <= 13))
+	res = 0;
+	tmp = 0;
+	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
-	if (*str == '-' || *str == '+')
-		sign = 1 - 2 * (*str++ == '-');
-	while (ft_isdigit(*str))
+	sign = num_sign(&str);
+	while (*str >= '0' && *str <= '9')
 	{
-		if (num > 922337203685477580
-			|| (num == 922337203685477580 && *str - '0' > 7))
-			return (-1 * (sign == 1));
-		num = num * 10 + *str++ - '0';
+		res = (res * 10) + (*str - '0');
+		if (res < tmp && sign == 1)
+			return (-1);
+		if (res < tmp && sign == -1)
+			return (0);
+		tmp = res;
+		str++;
 	}
-	return (num * sign);
+	return (sign * res);
 }

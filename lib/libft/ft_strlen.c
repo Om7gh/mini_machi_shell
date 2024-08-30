@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 07:58:36 by ialdidi           #+#    #+#             */
-/*   Updated: 2024/06/26 19:15:14 by omghazi          ###   ########.fr       */
+/*   Created: 2023/11/14 04:41:50 by omghazi           #+#    #+#             */
+/*   Updated: 2023/11/24 10:13:20 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
-	while (s && s[i])
+	while (s[i] != 0)
 		i++;
 	return (i);
 }

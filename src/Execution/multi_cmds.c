@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:56:11 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/21 17:46:21 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:56:29 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	first_commande(t_minishell *mini, t_cmd *cmd)
 {
 	pid_t	pid;
 
-	mini->pipe[0] = (int *)malloc(sizeof(int) * 2);
+	mini->pipe[0] = o_malloc(sizeof(int) * 2);
 	if (pipe(mini->pipe[0]) == -1)
 		return (perror("pipe"), ERROR);
 	reset_sigs();
@@ -38,7 +38,7 @@ int	other_cmds(t_minishell *mini, t_cmd *cmd, int i)
 {
 	pid_t	pid;
 
-	mini->pipe[i] = (int *)malloc(sizeof(int) * 2);
+	mini->pipe[i] = o_malloc(sizeof(int) * 2);
 	if (pipe(mini->pipe[i]) == -1)
 		return (perror("pipe"), ERROR);
 	reset_sigs();
@@ -84,18 +84,21 @@ int	multi_process(t_minishell *mini, t_cmd *cmds)
 	t_cmd	*tmp;
 
 	tmp = cmds;
-	first_commande(mini, tmp);
+	if (first_commande(mini, tmp) == ERROR)
+		return (ERROR);
 	tmp = tmp->next;
 	i = 1;
 	while (tmp->next && g_exit_stts != 6)
 	{
-		other_cmds(mini, tmp, i);
+		if (other_cmds(mini, tmp, i) == ERROR)
+			return (ERROR);
 		tmp = tmp->next;
 		i++;
 	}
 	i++;
 	if (g_exit_stts != 6)
-		last_cmd(mini, tmp, i);
+		if (last_cmd(mini, tmp, i) == ERROR)
+			return (ERROR);
 	while (wait(NULL) > 0)
 		;
 	mini->ret_value = getexstatus(mini->ret_value);
