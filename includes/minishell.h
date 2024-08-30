@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/29 20:53:32 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/30 18:00:58 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@
 volatile sig_atomic_t	g_exit_stts;
 
 /* FUNCTIONS */
+void		split_var(char *arg, char **id, char **value, int flag);
+int			isvalid(char *arg, int *join_flag);
+int			join_string(char c, char next_c, int is_last, int *flag);
+int			ft_strnchr(const char *s, int c);
 t_tokenizer	*make_node(char *input, int *j, t_lexer *type, t_stat *stat);
 t_tokenizer	*token_word(char *input, t_lexer *type, int *i);
 t_tokenizer	*sub_redirection(char *input, t_lexer *type, \
-	int *i, int j, t_stat *stat);
+	int *i, t_stat *stat);
 t_tokenizer	*token_special_char(char *input, t_lexer *type, int *i);
 int			check_dquotes(t_stat **stat, char *input, int *i, int *j);
 int			check_squotes(t_stat **stat, char *input, int *i, int *j);

@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:35:18 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/29 20:35:58 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/30 18:00:39 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,12 @@ t_tokenizer	*token_word(char *input, t_lexer *type, int *i)
 }
 
 t_tokenizer	*sub_redirection(char *input, t_lexer *type, \
-	int *i, int j, t_stat *stat)
+	int *i, t_stat *stat)
 {
 	t_tokenizer	*node;
+	int			j;
 
+	j = *i;
 	node = NULL;
 	if (input[*i] && input[*i] == '>' && input[*i + 1] == '>')
 	{
@@ -104,7 +106,7 @@ t_tokenizer	*token_special_char(char *input, t_lexer *type, int *i)
 	else if (input[*i] && input[*i] == '\'')
 		node = check_signle_quotes(input, i, type, stat);
 	else
-		node = sub_redirection(input, type, i, j, stat);
+		node = sub_redirection(input, type, i, stat);
 	if (input[*i])
 		(*i)++;
 	return (node);

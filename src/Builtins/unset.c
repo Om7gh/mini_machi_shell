@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:47:01 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/29 21:04:36 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/30 16:03:59 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,59 @@ int	check_unset(char c)
 		|| c == '_' || c == '>' || c == '<');
 }
 
-int	unset(t_cmd *cmd, t_env **env)
+int	is_valid_identifier(char *cmd)
+{
+	if (!check_unset(cmd[0]))
+	{
+		printf("unset: `%s': not a valid identifier\n", cmd);
+		return (0);
+	}
+	return (1);
+}
+
+int	unset_first(t_env **env, t_cmd *cmd, int i)
+{
+	t_env	*tmp;
+
+	tmp = *env;
+	if (!ft_strncmp(cmd->cmd[i], tmp->key, ft_strlen(tmp->key)))
+	{
+		*env = tmp->next;
+		return (1);
+	}
+	return (0);
+}
+
+int	unset_env_var(t_env **env, t_cmd *cmd, int i)
 {
 	t_env	*tmp;
 	t_env	*prev;
 	int		flag;
-	int		i;
+
+	tmp = *env;
+	prev = *env;
+	flag = 0;
+	while (tmp)
+	{
+		if (!ft_strcmp(cmd->cmd[i], tmp->key))
+		{
+			if (tmp == *env)
+				*env = (*env)->next;
+			else
+				prev->next = tmp->next;
+			flag = 1;
+			break ;
+		}
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	return (flag);
+}
+
+int	unset(t_cmd *cmd, t_env **env)
+{
+	int	i;
+	int	flag;
 
 	if (!cmd->cmd[1])
 		return (0);
@@ -32,34 +79,14 @@ int	unset(t_cmd *cmd, t_env **env)
 	{
 		if (!env || !*env)
 			return (0);
-		1 && (tmp = *env, prev = *env, flag = 0);
-		if (!check_unset(cmd->cmd[0][0]))
-			return (printf("unset: `%s': not \
-				a valid identifier\n", cmd->cmd[i]), 1);
-		else if (!ft_strncmp(cmd->cmd[i], tmp->key, ft_strlen(tmp->key)))
+		if (!is_valid_identifier(cmd->cmd[i]))
+			return (1);
+		if (unset_first(env, cmd, i))
 		{
-			*env = tmp->next;
-			if (cmd->cmd[i + 1])
-				i++;
+			i++;
 			continue ;
 		}
-		else
-		{
-			while (tmp)
-			{
-				if (!ft_strcmp(cmd->cmd[i], tmp->key))
-				{
-					if (tmp == *env)
-						(*env) = (*env)->next;
-					else
-						prev->next = tmp->next;
-					flag = 1;
-					break ;
-				}
-				prev = tmp;
-				tmp = tmp->next;
-			}
-		}
+		flag = unset_env_var(env, cmd, i);
 		if (!flag)
 			return (0);
 		i++;
