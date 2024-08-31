@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/31 17:05:07 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/31 17:11:16 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,24 @@ void	remove_quotes(t_tokenizer *token)
 {
 	t_tokenizer	*tmp;
 	int			i;
+	char	*str;
 
 	tmp = token;
 	while (tmp)
 	{
 		i = 0;
 		if (*tmp->stat == INDQUOTES)
-			tmp->token = remove_dquotes(tmp, &i);
+		{
+			str = remove_dquotes(tmp, &i);
+			if (str)
+				tmp->token = str;
+		}
 		else if (*tmp->stat == INQUOTES)
-			tmp->token = remove_squotes(tmp, &i);
+		{
+			str = remove_squotes(tmp, &i);
+			if (str)
+				tmp->token = str;	
+		}
 		tmp = tmp->next;
 	}
 }

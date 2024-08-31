@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/31 17:06:15 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/31 17:09:35 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 volatile sig_atomic_t	g_exit_stts;
 
 /* FUNCTIONS */
-char		remove_squotes(t_tokenizer *tmp, int *i);
-char		remove_dquotes(t_tokenizer *tmp, int *i);
+char		*remove_squotes(t_tokenizer *tmp, int *i);
+char		*remove_dquotes(t_tokenizer *tmp, int *i);
 void		join_tokens(t_tokenizer *token);
 int			word_char(char c);
 void		split_var(char *arg, char **id, char **value, int flag);
