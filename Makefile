@@ -6,7 +6,7 @@
 #    By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/01 15:45:53 by omghazi           #+#    #+#              #
-#    Updated: 2024/08/30 16:05:19 by omghazi          ###   ########.fr        #
+#    Updated: 2024/08/31 15:46:04 by omghazi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INCS			= $(INCS_DIR)minishell.h $(INCS_DIR)types.h
 LIBFT_DIR		= lib/libft/
 LIBFT			= $(LIBFT_DIR)libft.a
 CFLAGS			= -I$(INCS_DIR) -I$(LIBFT_DIR) 
-CFLAGS			+= -Wall -Werror -Wextra -g #-fsanitize=address
+CFLAGS			+= -Wall -Werror -Wextra -g -fsanitize=address
 NAME			= minishell
 RM			= rm -rf
 ERASE			= \033[2K\r

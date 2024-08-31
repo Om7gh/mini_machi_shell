@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 15:16:02 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/26 16:16:32 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/31 16:00:51 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	strs = o_malloc(count_words(s, c) + 1 * sizeof(char *));
+	strs = o_malloc(sizeof(char *) * ((count_words(s, c) + 1)));
 	return (split(strs, s, c));
 }

@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:35:18 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/30 18:00:39 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/30 20:41:13 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_tokenizer	*make_node(char *input, int *j, t_lexer *type, t_stat *stat)
 	else
 		*stat = GENERAL;
 	s = ft_substr(input, *j, *j + 1);
-	node = new_token(s, &type[0], stat);
+	node = new_token(s, &type[0], stat, false);
 	return (node);
 }
 
@@ -59,7 +59,7 @@ t_tokenizer	*token_word(char *input, t_lexer *type, int *i)
 		}
 		(*i)++;
 	}
-	node = new_token(ft_substr(input, *i - j, *i), type, stat);
+	node = new_token(ft_substr(input, *i - j, *i), type, stat, false);
 	return (node);
 }
 
@@ -73,14 +73,14 @@ t_tokenizer	*sub_redirection(char *input, t_lexer *type, \
 	node = NULL;
 	if (input[*i] && input[*i] == '>' && input[*i + 1] == '>')
 	{
-		node = new_token(ft_substr(input, j, j + 2), &type[5], stat);
+		node = new_token(ft_substr(input, j, j + 2), &type[5], stat, false);
 		(*i)++;
 	}
 	else if (input[*i] && input[*i] == '>' && input[*i + 1] != '>')
 		node = make_node(input, &j, &type[4], stat);
 	else if (input[*i] && input[*i] == '<' && input[*i + 1] == '<')
 	{
-		node = new_token(ft_substr(input, j, j + 2), &type[7], stat);
+		node = new_token(ft_substr(input, j, j + 2), &type[7], stat, false);
 		(*i)++;
 	}
 	else if (input[*i] && input[*i] == '<' && input[*i + 1] != '<')

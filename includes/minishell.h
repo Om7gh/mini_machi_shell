@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/30 18:00:58 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/31 17:06:15 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 #include <libft.h>
 #include <sys/wait.h>
-#include <types.h>
 #include <stdio.h>
+#include <stdbool.h>
+#include <types.h>
 #include <signal.h>
 #include <limits.h>
 #include <fcntl.h>
@@ -27,6 +28,10 @@
 volatile sig_atomic_t	g_exit_stts;
 
 /* FUNCTIONS */
+char		remove_squotes(t_tokenizer *tmp, int *i);
+char		remove_dquotes(t_tokenizer *tmp, int *i);
+void		join_tokens(t_tokenizer *token);
+int			word_char(char c);
 void		split_var(char *arg, char **id, char **value, int flag);
 int			isvalid(char *arg, int *join_flag);
 int			join_string(char c, char next_c, int is_last, int *flag);
@@ -86,7 +91,8 @@ t_tokenizer	*check_signle_quotes(char *input, int *i, t_lexer *type, \
 t_tokenizer	*check_double_quotes(char *input, int *i, t_lexer *type, \
 				t_stat *stat);
 t_tokenizer	*make_node(char *input, int *j, t_lexer *type, t_stat *stat);
-t_tokenizer	*new_token(void *content, t_lexer *type, t_stat *stat);
+t_tokenizer	*new_token(void *content, t_lexer *type, \
+	t_stat *stat, bool joinable);
 void		print_token(t_tokenizer *token);
 void		print_state(t_stat stat);
 void		print_type(t_lexer lexer);

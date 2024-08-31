@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 13:00:29 by omghazi           #+#    #+#             */
-/*   Updated: 2024/06/05 15:05:47 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/31 16:54:06 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	print_token(t_tokenizer	*token)
 		printf("token : [%s]\t\t", token->token);
 		print_type(*(token->type));
 		print_state(*(token->stat));
-		printf("len %zu\n", token->len);
+		printf("len %zu\t", token->len);
+		printf("joinable %d\n", token->joinable);
 		token = token->next;
 	}
 }

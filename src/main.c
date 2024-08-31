@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/29 16:52:02 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/31 15:56:54 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	init_minishell(t_minishell **minishell, t_env **envr, \
 	*envr = NULL;
 	*lexer = NULL;
 	*cmds = NULL;
+	*envr = NULL;
 	store_env((*minishell)->envirement, envr);
 	if (!*envr)
 		hardcode_env(envr);

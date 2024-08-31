@@ -6,17 +6,11 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/30 16:01:51 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/30 20:03:19 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	is_special(int c)
-{
-	return (c == '|' || c == '>' || c == '<' || c == ' ' || \
-		c == '"' || c == '\'');
-}
 
 void	init_counters(int *index, int *count)
 {

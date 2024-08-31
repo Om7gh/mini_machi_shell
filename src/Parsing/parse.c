@@ -6,16 +6,11 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/30 18:10:08 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/31 17:05:07 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	word_char(char c)
-{
-	return (c == '_' || c == '$');
-}
 
 int	check_validation(t_tokenizer *token, t_minishell *mini)
 {
@@ -49,37 +44,31 @@ int	check_validation(t_tokenizer *token, t_minishell *mini)
 void	remove_quotes(t_tokenizer *token)
 {
 	t_tokenizer	*tmp;
-	char		*str;
 	int			i;
 
 	tmp = token;
 	while (tmp)
 	{
-		str = NULL;
 		i = 0;
 		if (*tmp->stat == INDQUOTES)
-		{
-			while (tmp->token[i])
-			{
-				if (tmp->token[i] != '"')
-					str = ft_strjoin(str, ft_substr(tmp->token, i, i + 1));
-				if (tmp->token[i])
-					i++;
-			}
-			if (str)
-				tmp->token = ft_strdup(str);
-		}
+			tmp->token = remove_dquotes(tmp, &i);
 		else if (*tmp->stat == INQUOTES)
+			tmp->token = remove_squotes(tmp, &i);
+		tmp = tmp->next;
+	}
+}
+
+void	join_tokens(t_tokenizer *token)
+{
+	t_tokenizer	*tmp;
+
+	tmp = token;
+	while (tmp)
+	{
+		if (tmp->joinable == 1)
 		{
-			while (tmp->token[i])
-			{
-				if (tmp->token[i] != '\'')
-					str = ft_strjoin(str, ft_substr(tmp->token, i, i + 1));
-				if (tmp->token[i])
-					i++;
-			}
-			if (str)
-				tmp->token = ft_strdup(str);
+			tmp->token = ft_strjoin(tmp->token, tmp->next->token);
+			tmp->next = tmp->next->next;
 		}
 		tmp = tmp->next;
 	}
@@ -98,6 +87,7 @@ void	parse_input(t_minishell *mini, t_cmd **cmds)
 		return ;
 	}
 	remove_quotes(mini->start);
+	join_tokens(mini->start);
 	if (mini->start)
 	{
 		send_to_execution(mini->start, cmds);

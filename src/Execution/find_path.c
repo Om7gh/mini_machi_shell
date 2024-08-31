@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:20:32 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/30 15:27:01 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/31 15:49:13 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*join_cmd_path(t_minishell *mini, char *cmd)
 {
 	char		**path;
 	char		*full_path;
+	int			i;
 
 	if (!cmd || !cmd[0])
 		return (NULL);
@@ -54,12 +55,12 @@ char	*join_cmd_path(t_minishell *mini, char *cmd)
 	if (!path)
 		return (NULL);
 	full_path = ft_strjoin("/", cmd);
-	while (*path)
+	i = -1;
+	while (path[++i])
 	{
-		cmd = ft_strjoin(*path, full_path);
+		cmd = ft_strjoin(path[i], full_path);
 		if (!access(cmd, F_OK) || !access(cmd, X_OK))
 			return (cmd);
-		path++;
 	}
 	return (NULL);
 }
