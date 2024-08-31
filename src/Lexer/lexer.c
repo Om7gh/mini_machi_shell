@@ -6,11 +6,17 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 05:59:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/30 11:01:04 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/31 19:08:25 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+void	throw_error(void)
+{
+	ft_putendl_fd("minishell: maximum here_document count exceeded", 2);
+	exit(2);
+}
 
 int	fill_token_list(char *input, \
 	t_tokenizer **token, t_lexer *type, t_tokenizer *node)

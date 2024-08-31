@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:35:18 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/30 20:41:13 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/31 19:07:16 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ t_tokenizer	*sub_redirection(char *input, t_lexer *type, \
 {
 	t_tokenizer	*node;
 	int			j;
+	static int	count;
 
-	j = *i;
-	node = NULL;
+	1 && (j = *i, node = NULL);
 	if (input[*i] && input[*i] == '>' && input[*i + 1] == '>')
 	{
 		node = new_token(ft_substr(input, j, j + 2), &type[5], stat, false);
@@ -80,6 +80,7 @@ t_tokenizer	*sub_redirection(char *input, t_lexer *type, \
 		node = make_node(input, &j, &type[4], stat);
 	else if (input[*i] && input[*i] == '<' && input[*i + 1] == '<')
 	{
+		count++;
 		node = new_token(ft_substr(input, j, j + 2), &type[7], stat, false);
 		(*i)++;
 	}
@@ -87,6 +88,8 @@ t_tokenizer	*sub_redirection(char *input, t_lexer *type, \
 		node = make_node(input, &j, &type[6], stat);
 	else if (input[*i] && input[*i] == ' ')
 		node = make_node(input, &j, &type[3], stat);
+	if (count == 17)
+		throw_error();
 	return (node);
 }
 

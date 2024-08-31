@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:48 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/29 14:50:45 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/31 18:36:37 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	here_hundle(int sig)
 
 void	here_doc_hundle(t_tokenizer *delimiter, t_minishell *mini)
 {
-	char	*input;
+	char		*input;
 
 	while (1)
 	{
