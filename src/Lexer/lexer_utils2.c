@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:35:18 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/31 19:07:16 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/01 19:44:05 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ t_tokenizer	*token_special_char(char *input, t_lexer *type, int *i)
 	stat = o_malloc(sizeof(t_stat));
 	if (input[*i] && input[*i] == '|')
 		node = make_node(input, i, &type[1], stat);
+	else if (input[*i] && input[*i] == '*')
+		node = make_node(input, i, &type[10], stat);
 	else if (input[*i] && input[*i] == '"')
 		node = check_double_quotes(input, i, type, stat);
 	else if (input[*i] && input[*i] == '\'')

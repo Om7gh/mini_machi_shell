@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/31 19:08:15 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/01 14:58:33 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <limits.h>
 #include <fcntl.h>
 #include <termios.h>
+#include <dirent.h>
 #include <sys/stat.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -28,6 +29,8 @@
 volatile sig_atomic_t	g_exit_stts;
 
 /* FUNCTIONS */
+char	*sort_wildcard(char *wildcard);
+char		*ft_wildcard(char *dirname);
 void		throw_error(void);
 void		close_all(void);
 char		*remove_squotes(t_tokenizer *tmp, int *i);

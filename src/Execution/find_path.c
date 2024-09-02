@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:20:32 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/31 15:49:13 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/02 13:49:40 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,16 @@ int	my_execve(t_minishell *mini, t_cmd *cmds)
 	if (cmds->cmd)
 	{
 		path = find_cmd(mini, cmds->cmd[0]);
-		if (path)
+		if (!path || !ft_strchr(path, '/'))
 		{
-			execve(path, cmds->cmd, my_env);
-			perror("execve");
-			exit(1);
-		}
-		else
-		{
-			ft_putstr_fd("minishell: commande ", 2);
-			ft_putstr_fd(cmds->cmd[0], 2);
-			ft_putendl_fd(" Not found", 2);
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(ft_split(cmds->cmd[0], ' ')[0], 2);
+			ft_putendl_fd(": command not found", 2);
 			exit(UNKNOWN_COMMAND);
 		}
+		execve(path, cmds->cmd, my_env);
+		perror("execve");
+		exit(1);
 	}
 	return (0);
 }

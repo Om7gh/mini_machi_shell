@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:23:13 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/30 20:03:54 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/01 20:23:17 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	count_len(t_tokenizer *lst, int *commands_len, int *redirection_len)
 			tmp = tmp->next->next;
 			continue ;
 		}
-		else if (*tmp->type == WORD)
+		else if (*tmp->type == WORD || *tmp->type == WILDCARD)
 		{
 			(*commands_len)++;
 			tmp = tmp->next;
@@ -69,7 +69,7 @@ void	count_len(t_tokenizer *lst, int *commands_len, int *redirection_len)
 int	is_special(int c)
 {
 	return (c == '|' || c == '>' || c == '<' || c == ' ' || \
-		c == '"' || c == '\'');
+		c == '"' || c == '\'' || c == '*');
 }
 
 int	word_char(char c)

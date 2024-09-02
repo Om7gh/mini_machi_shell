@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 05:59:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/31 19:08:25 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/01 20:19:27 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	lexer_first(t_tokenizer **token, char *input)
 	t_lexer		*type;
 
 	node = NULL;
-	type = o_malloc(sizeof(t_lexer) * 10);
+	type = o_malloc(sizeof(t_lexer) * 11);
 	type[0] = WORD;
 	type[1] = PIPE;
 	type[3] = WHITESPACE;
@@ -60,6 +60,7 @@ int	lexer_first(t_tokenizer **token, char *input)
 	type[7] = LESSLESS;
 	type[8] = QUOTE;
 	type[9] = D_QUOTE;
+	type[10] = WILDCARD;
 	if (!fill_token_list(input, token, type, node))
 		return (0);
 	return (1);

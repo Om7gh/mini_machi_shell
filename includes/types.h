@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:49 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/30 20:37:59 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/01 19:42:33 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 typedef struct s_node				t_node;
 typedef struct s_minishell			t_minishell;
 typedef struct s_tokenizer			t_tokenizer;
-typedef struct s_signal				t_signal;
 typedef struct s_env				t_env;
 typedef struct s_cmd				t_cmd;
 typedef struct s_expansion			t_expantion;
@@ -64,18 +63,10 @@ struct s_minishell
 	int				infile;
 	int				fdin;
 	int				fdout;
-	int				last;
 	int				ret_value;
 	int				here_cpy;
 	int				exit;
 	int				count;
-};
-
-struct	s_signal
-{
-	int			sigint;
-	int			sigquit;
-	int			exit_status;
 };
 
 struct s_env
@@ -87,15 +78,16 @@ struct s_env
 
 enum	e_lexer
 {
-	GREAT, // >
-	LESS, // <
-	GREATGREAT, // >>
-	LESSLESS, // <<
-	PIPE, // |
+	GREAT,
+	LESS,
+	GREATGREAT,
+	LESSLESS,
+	PIPE,
 	WORD,
-	WHITESPACE, // ' '
-	D_QUOTE, // ""
-	QUOTE, // ''
+	WHITESPACE,
+	D_QUOTE,
+	QUOTE,
+	WILDCARD
 } ;
 
 enum	e_stat

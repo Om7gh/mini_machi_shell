@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 13:00:29 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/31 16:54:06 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/01 19:44:39 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	print_type(t_lexer lexer)
 		printf("type : GREATER\t");
 	else if (lexer == GREATGREAT)
 		printf("type : GREATER_GREATER\t");
+	else if (lexer == WILDCARD)
+		printf("type : WILDCARD\t");
 	else
 		printf("NO TYPE\t");
 }
