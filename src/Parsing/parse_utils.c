@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/02 14:27:48 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/02 15:32:38 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_counters(int *index, int *count)
 void	handle_word_token(t_tokenizer *tmp, t_cmd *new, int *i)
 {
 	char	**s;
-	int	j;
+	int		j;
 
 	j = 0;
 	if (ft_strchr(tmp->token, ' ') && *tmp->stat == GENERAL)
