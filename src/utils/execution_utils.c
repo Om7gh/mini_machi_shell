@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:54:01 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/26 15:57:26 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/03 15:22:55 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	**env_to_array(t_env *env_list)
 	if (!env_list)
 		return (NULL);
 	size = envname_size(env_list);
-	env = malloc(sizeof(char *) * (size + 1));
+	env = o_malloc(sizeof(char *) * (size + 1));
 	if (!env)
 		return (NULL);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:56:11 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/26 16:56:29 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/02 18:26:30 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,20 @@ int	multi_process(t_minishell *mini, t_cmd *cmds)
 
 	tmp = cmds;
 	if (first_commande(mini, tmp) == ERROR)
-		return (ERROR);
+		exit(2);
 	tmp = tmp->next;
 	i = 1;
 	while (tmp->next && g_exit_stts != 6)
 	{
 		if (other_cmds(mini, tmp, i) == ERROR)
-			return (ERROR);
+			exit(2);
 		tmp = tmp->next;
 		i++;
 	}
 	i++;
 	if (g_exit_stts != 6)
 		if (last_cmd(mini, tmp, i) == ERROR)
-			return (ERROR);
+			exit(2);
 	while (wait(NULL) > 0)
 		;
 	mini->ret_value = getexstatus(mini->ret_value);

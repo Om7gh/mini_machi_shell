@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/02 15:32:38 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/03 16:28:05 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,33 @@ void	init_counters(int *index, int *count)
 	count[1] = 0;
 }
 
-void	handle_word_token(t_tokenizer *tmp, t_cmd *new, int *i)
+int	ft_split_len(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
+}
+
+void	handle_word_token(t_tokenizer *tmp, t_cmd *new, int *i, int *count)
 {
 	char	**s;
 	int		j;
 
 	j = 0;
+	s = NULL;
 	if (ft_strchr(tmp->token, ' ') && *tmp->stat == GENERAL)
 	{
 		s = ft_split(tmp->token, ' ');
-		while (s[j])
-			new->cmd[(*i)++] = ft_strdup(s[j++]);
+		count[0] += ft_split_len(s);
+		new = new_cmd(count[0], count[1]);
+		while (s && s[j])
+		{
+			new->cmd[(*i)++] = ft_strdup(s[j]);
+			j++;
+		}
 	}
 	else
 		new->cmd[(*i)++] = ft_strdup(tmp->token);
@@ -61,7 +77,7 @@ void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 		while (tmp && *tmp->type != PIPE)
 		{
 			if (*tmp->type == WORD || *tmp->type == WILDCARD)
-				handle_word_token(tmp, new, &index[0]);
+				handle_word_token(tmp, new, &index[0], count);
 			else
 				handle_non_word_token(&tmp, new, &index[1]);
 			tmp = tmp->next;

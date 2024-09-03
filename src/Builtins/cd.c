@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:38 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/29 16:57:57 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/02 18:31:44 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	set_env(t_env **env, char *key, char *value)
 	{
 		if (!ft_strcmp(tmp->key, key))
 		{
-			free(tmp->value);
-			tmp->value = ft_strdup(value);
+			if (value)
+				tmp->value = ft_strdup(value);
 			return (1);
 		}
 		tmp = tmp->next;

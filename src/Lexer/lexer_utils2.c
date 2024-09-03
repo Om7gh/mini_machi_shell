@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:35:18 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/01 19:44:05 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/03 15:22:44 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_tokenizer	*token_word(char *input, t_lexer *type, int *i)
 	t_stat		*stat;
 
 	j = 0;
-	stat = malloc(sizeof(t_stat));
+	stat = o_malloc(sizeof(t_stat));
 	*stat = GENERAL;
 	while (input[*i] && !check_word_input(input[*i]))
 	{
