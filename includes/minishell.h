@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/02 15:37:28 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/03 19:57:08 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 volatile sig_atomic_t	g_exit_stts;
 
 /* FUNCTIONS */
+t_cmd		*filter_empty_cmd(t_cmd *cmd);
 void		join_tokens(t_tokenizer *token);
 char		*sort_wildcard(char *wildcard);
 char		*ft_wildcard(char *dirname);
@@ -85,7 +86,7 @@ void		count_len(t_tokenizer *lst, int *commands_len, \
 				int *redirection_len);
 void		clear_cmd(t_cmd **cmd, void (*del)(void *));
 void		del_one_cmd(t_cmd *cmds, void (*del)(void *));
-t_cmd		*new_cmd(int cmd, int red);
+t_cmd		*new_cmd(int cmd, int red, t_stat *stat);
 void		append_to_exec(t_cmd **cmds, t_cmd *cmd);
 int			between_pipe(t_tokenizer *lst);
 int			ft_strcmp(char *s1, char *s2);
