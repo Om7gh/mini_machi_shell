@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:20:32 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/03 16:39:23 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/03 16:50:53 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,6 @@ char	*find_cmd(t_minishell *mini, char *cmd)
 	return (NULL);
 }
 
-char **filter(t_cmd *cmd)
-{
-	t_cmd	*tmp;
-	char	**ret;
-
-	tmp = cmd;
-	while (tmp)
-	{
-		
-	}
-}
 int	my_execve(t_minishell *mini, t_cmd *cmds)
 {
 	char	*path;
