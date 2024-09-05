@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 16:31:00 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/05 19:43:06 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@
 volatile sig_atomic_t	g_exit_stts;
 
 /* FUNCTIONS */
-int	ft_split_len(char **s);
+int			is_directory(char *cmd);
+int			check_wrong_command(char *cmd);
+int			ft_split_len(char **s);
 t_cmd		*filter_empty_cmd(t_cmd *cmd);
 void		join_tokens(t_tokenizer *token);
 char		*sort_wildcard(char *wildcard);

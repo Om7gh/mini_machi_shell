@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 15:05:12 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/05 19:22:02 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int	check_validation(t_tokenizer *token, t_minishell *mini)
 {
 	if (token && *token->type == PIPE)
 		return (printf("syntax error near unexpected token `%s'\n", \
-			token->token), 0);
+			token->token), 258);
 	while (token)
 	{
 		if (g_exit_stts == 6)
 			return (-1);
 		if (token && *token->type != WORD && !token->next)
 			return (printf("syntax error near unexpected token `%s'\n", \
-				token->token), 0);
+				token->token), 258);
 		if (*token->type == LESSLESS && *token->next->type == WORD)
 			if (!here_doc(token->next, mini))
 				return (0);
@@ -32,7 +32,7 @@ int	check_validation(t_tokenizer *token, t_minishell *mini)
 			if (token->next)
 				if (*token->next->type == PIPE || *token->next->type != WORD)
 					return (printf("syntax error near unexpected token `%s'\n", \
-						token->token), 0);
+						token->token), 258);
 		}
 		if (ft_strchr(token->token, '$') && *token->stat != INQUOTES)
 			token->token = expansion(token->token, mini);
@@ -88,11 +88,9 @@ void	parse_input(t_minishell *mini, t_cmd **cmds)
 	int	checker;
 
 	checker = check_validation(mini->start, mini);
-	if (checker == 0)
-		return ;
-	else if (checker == -1)
+	if (checker == 258)
 	{
-		mini->ret_value = 1;
+		mini->ret_value = 258;
 		return ;
 	}
 	remove_quotes(mini->start);

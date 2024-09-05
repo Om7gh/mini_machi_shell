@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 17:02:33 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/05 18:19:11 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 		init_counters(index, count);
 		count_len(tmp, &count[0], &count[1]);
 		if (ft_strchr(tmp->token, ' ') && *tmp->stat == GENERAL)
-			count[0] += 1;
+			count[0] = ft_split_len(ft_split(tmp->token, ' '));
 		new = new_cmd(count[0], count[1], tmp->stat, ft_strlen(tmp->token));
 		while (tmp && *tmp->type != PIPE)
 		{
@@ -85,5 +85,5 @@ void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 		append_to_exec(cmd, new);
 		if (tmp && tmp->next)
 			tmp = tmp->next;
-	}	
+	}
 }

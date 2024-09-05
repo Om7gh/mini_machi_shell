@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:48 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/31 18:36:37 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/05 17:51:07 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	here_doc_hundle(t_tokenizer *delimiter, t_minishell *mini)
 
 int	here_doc(t_tokenizer *delimiter, t_minishell *mini)
 {
+	unlink("/tmp/ana_machi_heredoc");
 	mini->fdin = open("/tmp/ana_machi_heredoc", \
 		O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (mini->fdin == -1)
