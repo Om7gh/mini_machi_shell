@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 19:04:21 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/03 19:52:46 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/05 16:44:48 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	execute_single_commande(t_minishell *mini, t_cmd *cmd)
 		if (pid == 0)
 			status = my_execve(mini, cmd);
 		waitpid(pid, &status, 0);
-		status = getexstatus(status);
+		// status = getexstatus(status);
 	}
 	return (status);
 }

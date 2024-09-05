@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:44:36 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/03 18:36:56 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/05 16:30:40 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	append_to_exec(t_cmd **cmds, t_cmd *cmd)
 	head->next = cmd;
 }
 
-t_cmd	*new_cmd(int cmd, int red, t_stat *stat)
+t_cmd	*new_cmd(int cmd, int red, t_stat *stat, int len)
 {
 	t_cmd	*new;
 
@@ -40,6 +40,7 @@ t_cmd	*new_cmd(int cmd, int red, t_stat *stat)
 	new->red[red] = NULL;
 	new->stat = malloc(sizeof(t_stat));
 	new->stat = stat;
+	new->cmd_len = len;
 	new->next = NULL;
 	return (new);
 }

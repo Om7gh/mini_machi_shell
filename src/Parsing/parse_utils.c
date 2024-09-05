@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/03 19:56:44 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/05 17:02:33 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_split_len(char **s)
 	return (i);
 }
 
-void	handle_word_token(t_tokenizer *tmp, t_cmd *new, int *i, int *count)
+void	handle_word_token(t_tokenizer *tmp, t_cmd *new, int *i)
 {
 	char	**s;
 	int		j;
@@ -40,8 +40,6 @@ void	handle_word_token(t_tokenizer *tmp, t_cmd *new, int *i, int *count)
 	if (ft_strchr(tmp->token, ' ') && *tmp->stat == GENERAL)
 	{
 		s = ft_split(tmp->token, ' ');
-		count[0] += ft_split_len(s);
-		new = new_cmd(count[0], count[1], tmp->stat);
 		while (s && s[j])
 			new->cmd[(*i)++] = ft_strdup(s[j++]);
 	}
@@ -70,17 +68,22 @@ void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 		count_len(tmp, &count[0], &count[1]);
 		if (ft_strchr(tmp->token, ' ') && *tmp->stat == GENERAL)
 			count[0] += 1;
-		new = new_cmd(count[0], count[1], tmp->stat);
+		new = new_cmd(count[0], count[1], tmp->stat, ft_strlen(tmp->token));
 		while (tmp && *tmp->type != PIPE)
 		{
-			if (*tmp->type == WORD || *tmp->type == WILDCARD)
-				handle_word_token(tmp, new, &index[0], count);
+			if (tmp && *tmp->stat == GENERAL && ft_strlen(tmp->token) == 0)
+				tmp = tmp->next;
 			else
-				handle_non_word_token(&tmp, new, &index[1]);
-			tmp = tmp->next;
+			{
+				if (*tmp->type == WORD)
+					handle_word_token(tmp, new, &index[0]);
+				else
+					handle_non_word_token(&tmp, new, &index[1]);
+				tmp = tmp->next;
+			}
 		}
 		append_to_exec(cmd, new);
 		if (tmp && tmp->next)
 			tmp = tmp->next;
-	}
+	}	
 }

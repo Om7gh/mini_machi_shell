@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:26:01 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/03 19:56:58 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/05 16:36:32 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,15 @@ int	is_builtins(t_cmd *cmds)
 	return (0);
 }
 
-t_cmd	*filter_empty_cmd(t_cmd *cmd)
+int	new_cmd_len(t_cmd *cmd)
 {
+	int	i;
+	int	j;
 	t_cmd	*tmp;
-	t_cmd	*new;
-	int		i;
-	int		j;
 
-	1 && (tmp = cmd, i = 0, j = 0);
-	new = o_malloc(sizeof(t_cmd));
-	new->cmd = o_malloc(sizeof(char *) * 100);
-	if (!new->cmd)
-	{
-		free(new);
-		return (NULL);
-	}
+	i = 0;
+	j = 0;
+	tmp = cmd;
 	while (tmp->cmd[i])
 	{
 		if (ft_strlen(tmp->cmd[i]) == 0 && tmp->stat[i] == GENERAL)
@@ -61,9 +55,30 @@ t_cmd	*filter_empty_cmd(t_cmd *cmd)
 			i++;
 			continue ;
 		}
-		new->cmd[j++] = ft_strdup(tmp->cmd[i]);
 		i++;
+		j++;
 	}
-	new->cmd[j] = NULL;
-	return (new);
+	return (j);
 }
+
+// t_cmd	*filter_empty_cmd(t_cmd *cmd)
+// {
+// 	t_cmd	*tmp;
+// 	t_cmd	*new;
+// 	int		i;
+// 	int		j;
+
+// 	printf("%d\n", cmd->cmd_len);
+// 	1 && (tmp = cmd, i = 0, j = 0);
+// 	new = malloc(sizeof(t_cmd));
+// 	new->cmd = malloc(sizeof(char *) * (new_cmd_len(tmp) + 1));
+// 	while (tmp->cmd[i])
+// 	{
+// 		if (tmp->stat[i] == GENERAL && tmp->cmd_len == 0)
+// 			i++;
+// 		else
+// 			new->cmd[j++] = ft_strdup(tmp->cmd[i++]);
+// 	}
+// 	new->cmd[j] = NULL;
+// 	return (new);
+// }

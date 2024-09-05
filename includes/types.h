@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:49 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/03 18:17:22 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/05 16:29:58 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ struct s_cmd
 {
 	char			**cmd;
 	char			**red;
+	int				cmd_len;
 	struct s_cmd	*next;
 	t_stat			*stat;
 };
