@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:15:56 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/02 19:15:01 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/05 21:15:51 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ char	*ft_wildcard(char *dirname)
 {
 	DIR				*dir;
 	struct dirent	*entry;
-	int				status;
 	char			*path;
 
-	status = 0;
 	dir = opendir(dirname);
 	if (!dir)
 		return (perror("opendir"), "");

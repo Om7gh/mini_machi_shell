@@ -6,13 +6,13 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 03:35:08 by omghazi           #+#    #+#             */
-/*   Updated: 2023/11/20 12:36:45 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/06 09:49:40 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	num_sign(const char **s)
+int	num_sign(const char **s)
 {
 	int	sign;
 

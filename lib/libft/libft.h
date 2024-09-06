@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 04:08:42 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/29 16:41:58 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/06 09:49:55 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdint.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <limits.h>
 
 typedef struct s_propre				t_propre;
 typedef struct s_list
@@ -43,6 +44,7 @@ int			ft_tolower(int c);
 int			ft_strncmp(const char *s1, const char *s2, int n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 int			ft_lstsize(t_list *lst);
+int			num_sign(const char **s);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
