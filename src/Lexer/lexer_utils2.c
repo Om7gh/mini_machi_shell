@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:35:18 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 20:05:01 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/07 18:01:30 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,20 @@ t_tokenizer	*token_word(char *input, t_lexer *type, int *i)
 	t_tokenizer	*node;
 	int			j;
 	t_stat		*stat;
+	bool		joinable;
 
 	j = 0;
 	stat = o_malloc(sizeof(t_stat));
 	*stat = GENERAL;
+	joinable = false;
 	while (input[*i] && !check_word_input(input[*i]))
 	{
 		j++;
-		if (input[*i] == '\'')
-		{
-			if (!check_squotes(&stat, input, i, &j))
-				return (NULL);
-		}
-		else if (input[*i] == '"')
-		{
-			if (!check_dquotes(&stat, input, i, &j))
-				return (NULL);
-		}
 		(*i)++;
 	}
-	node = new_token(ft_substr(input, *i - j, *i), type, stat, false);
+	if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
+		joinable = true;
+	node = new_token(ft_substr(input, *i - j, *i), type, stat, joinable);
 	return (node);
 }
 
