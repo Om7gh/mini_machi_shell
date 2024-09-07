@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 19:22:02 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/07 18:00:01 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,11 @@ void	parse_input(t_minishell *mini, t_cmd **cmds)
 	if (checker == 258)
 	{
 		mini->ret_value = 258;
+		return ;
+	}
+	if (checker == -1)
+	{
+		mini->ret_value = 1;
 		return ;
 	}
 	remove_quotes(mini->start);

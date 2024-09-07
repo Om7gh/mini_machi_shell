@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:24 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/06 09:48:36 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/07 17:00:29 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_atoi_exit(const char *str)
 	long	res;
 	long	tmp;
 	int		sign;
-	int	flag;
+	int		flag;
 
 	1 && (res = 0, tmp = 0, flag = 0);
 	while ((*str >= 9 && *str <= 13) || *str == 32)
