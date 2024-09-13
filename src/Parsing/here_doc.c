@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:48 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 17:51:07 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 12:49:31 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	here_doc_hundle(t_tokenizer *delimiter, t_minishell *mini)
 			input = expansion(input, mini);
 		write(mini->fdin, input, ft_strlen(input));
 		write(mini->fdin, "\n", 1);
-		free(input);
+		// free(input);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 19:04:21 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/13 11:24:32 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 12:40:09 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	execute_single_commande(t_minishell *mini, t_cmd *cmd)
 		status = execute_builtin(mini, cmd);
 	else
 	{
-		reset_sigs();
+		signal(SIGINT, SIG_IGN);
 		pid = fork();
 		if (pid == -1)
 			return (perror("fork"), 3);

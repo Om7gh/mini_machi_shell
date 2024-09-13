@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:28:58 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/08/31 21:49:02 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 12:41:34 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	getexstatus(int stts)
 	{
 		ret = WTERMSIG(stts);
 		if (ret == SIGINT)
-			return (130);
+			return (write(1, "\n", 1), 130);
 		else if (ret == SIGQUIT)
-			return (131);
+			return (write(1, "QUIT: 3\n", 8), 131);
 		else
 			return (128 + ret);
 	}
@@ -41,28 +41,10 @@ void	handle_sigint(int sig)
 	}
 }
 
-void	handle_sigint_child(int sig)
-{
-	if (sig == SIGINT)
-	{
-		g_exit_stts = 1;
-		write(1, "\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-	}
-	else if (sig == SIGQUIT)
-	{
-		g_exit_stts = 1;
-		write(1, "QUIT: 3\n", 8);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-	}
-}
-
 void	reset_sigs(void)
 {
-	signal(SIGINT, handle_sigint_child);
-	signal(SIGQUIT, handle_sigint_child);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
 	signal(SIGTSTP, SIG_DFL);
 }
 

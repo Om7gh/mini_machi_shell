@@ -6,14 +6,14 @@
 #    By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/01 15:45:53 by omghazi           #+#    #+#              #
-#    Updated: 2024/09/13 11:29:44 by omghazi          ###   ########.fr        #
+#    Updated: 2024/09/13 13:01:01 by omghazi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS			= $(addprefix src/, main.c signals.c \
                 	  $(addprefix builtins/, cd.c echo.c env.c exit.c export.c export_utils.c pwd.c unset.c) \
                 	  $(addprefix Parsing/, parse.c parse_utils.c parse_utils2.c env.c here_doc.c expansion.c expansion_utils.c) \
-                	  $(addprefix utils/, execution_utils.c execution_utils2.c libft_pro_max.c store_execution.c store_node.c wildcard.c print.c) \
+                	  $(addprefix utils/, safe_free.c execution_utils.c execution_utils2.c libft_pro_max.c store_execution.c store_node.c wildcard.c print.c) \
                 	  $(addprefix Execution/, execution.c execution_process.c execve_pro_max.c find_path.c multi_cmds.c process.c red_process.c) \
                 	  $(addprefix Lexer/, lexer.c lexer_utils.c lexer_utils2.c))
 OBJS_DIR		= obj/

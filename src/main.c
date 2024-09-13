@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/03 16:02:28 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 12:56:22 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ static void	process_line(t_minishell *minishell, \
 	{
 		add_history(minishell->line);
 		close_all();
-		free(minishell->line);
-		clear_token(lexer, free);
-		clear_cmd(cmds, free);
+		safe_clean(minishell, cmds, lexer);
 	}
 }
 
@@ -70,6 +68,7 @@ int	main(int argc, char **argv, char **env)
 	t_env		*envr;
 	t_tokenizer	*lexer;
 	t_cmd		*cmds;
+	int			status;
 
 	(void)argc;
 	(void)argv;
@@ -89,5 +88,8 @@ int	main(int argc, char **argv, char **env)
 			minishell->ret_value = 1;
 		process_line(minishell, &lexer, &cmds);
 	}
-	return (minishell->ret_value);
+	status = minishell->ret_value;
+	clear_history();
+	clear_env(&envr, free);
+	return (status);
 }

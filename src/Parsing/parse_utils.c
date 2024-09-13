@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/13 11:51:39 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 12:53:19 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	handle_word_token(t_tokenizer *tmp, t_cmd *new, int *i)
 	{
 		s = ft_split(tmp->token, ' ');
 		while (s && s[j])
+		{
 			new->cmd[(*i)++] = ft_strdup(s[j++]);
+			free(s[j - 1]);
+		}
 	}
 	else
 		new->cmd[(*i)++] = ft_strdup(tmp->token);

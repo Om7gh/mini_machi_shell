@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:44:36 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 16:30:40 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 12:54:59 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,17 @@ t_cmd	*new_cmd(int cmd, int red, t_stat *stat, int len)
 	return (new);
 }
 
-void	del_one_cmd(t_cmd *cmds, void (*del)(void *))
+void	del_one_cmd(t_cmd *cmds)
 {
 	if (!cmds)
 		return ;
-	del(cmds->red);
-	del(cmds->cmd);
+	free_array(cmds->red);
+	free_array(cmds->cmd);
 	free(cmds);
+	// free(cmds->stat);
 }
 
-void	clear_cmd(t_cmd **cmd, void (*del)(void *))
+void	clear_cmd(t_cmd **cmd)
 {
 	t_cmd	*tmp;
 
@@ -63,7 +64,7 @@ void	clear_cmd(t_cmd **cmd, void (*del)(void *))
 	while (*cmd)
 	{
 		tmp = (*cmd)->next;
-		del_one_cmd(*cmd, del);
+		del_one_cmd(*cmd);
 		*cmd = tmp;
 	}
 }

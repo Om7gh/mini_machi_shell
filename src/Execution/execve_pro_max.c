@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:34 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 19:41:00 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 12:43:28 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	my_execve(t_minishell *mini, t_cmd *cmds)
 	char	**my_env;
 
 	my_env = env_to_array(mini->env);
+	reset_sigs();
 	if (cmds->cmd)
 	{
 		path = find_cmd(mini, cmds->cmd[0]);

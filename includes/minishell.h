@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 19:43:06 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 12:55:29 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@
 volatile sig_atomic_t	g_exit_stts;
 
 /* FUNCTIONS */
+void safe_clean(t_minishell *mini, t_cmd **cmds, t_tokenizer **lexer);
+void free_array(char **array);
+void	clear_env(t_env **lst, void (*del)(void *));
 int			is_directory(char *cmd);
 int			check_wrong_command(char *cmd);
 int			ft_split_len(char **s);
-t_cmd		*filter_empty_cmd(t_cmd *cmd);
 void		join_tokens(t_tokenizer *token);
 char		*sort_wildcard(char *wildcard);
 char		*ft_wildcard(char *dirname);
@@ -87,8 +89,8 @@ int			unset(t_cmd *token, t_env **env);
 void		send_to_execution(t_tokenizer *token, t_cmd **cmd);
 void		count_len(t_tokenizer *lst, int *commands_len, \
 				int *redirection_len);
-void		clear_cmd(t_cmd **cmd, void (*del)(void *));
-void		del_one_cmd(t_cmd *cmds, void (*del)(void *));
+void		clear_cmd(t_cmd **cmd);
+void		del_one_cmd(t_cmd *cmds);
 t_cmd		*new_cmd(int cmd, int red, t_stat *stat, int len);
 void		append_to_exec(t_cmd **cmds, t_cmd *cmd);
 int			between_pipe(t_tokenizer *lst);
