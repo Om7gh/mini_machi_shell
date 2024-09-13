@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:38 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/02 18:31:44 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 12:18:58 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ int	cd(t_cmd *cmd, t_env *env)
 	char	*pwd;
 
 	oldpwd = getcwd(NULL, 0);
-	if (cmd->cmd[1] == NULL || !ft_strcmp(cmd->cmd[1], "~"))
+	if (cmd->cmd[1] == NULL || (cmd->cmd[1] && !ft_strcmp(cmd->cmd[1], "~")))
 	{
 		path = get_values(&env, "HOME");
 		if (chdir(path) == -1)
-			return (handle_chdir_error(path), 1);
+			return (free(oldpwd), handle_chdir_error(path), 1);
 	}
 	else
 	{
@@ -89,6 +89,7 @@ int	cd(t_cmd *cmd, t_env *env)
 		if (chdir(path) == -1)
 		{
 			handle_chdir_error(path);
+			free(oldpwd);
 			return (1);
 		}
 	}

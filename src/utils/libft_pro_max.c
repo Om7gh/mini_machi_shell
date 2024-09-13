@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:23:13 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/01 20:23:17 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 11:48:34 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int	ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
+	if (s2[i] == '\0')
+		return (s1[i]);
+	if (s1[i] == '\0')
+		return (s2[i]);
 	while (s1 && s2 && (s1[i] || s2[i]))
 	{
 		if (s1[i] != s2[i])
@@ -60,6 +64,11 @@ void	count_len(t_tokenizer *lst, int *commands_len, int *redirection_len)
 		}
 		else if (*tmp->type == WORD || *tmp->type == WILDCARD)
 		{
+			if (*tmp->stat == GENERAL && !ft_strlen(tmp->token))
+			{
+				tmp = tmp->next;
+				continue;
+			}
 			(*commands_len)++;
 			tmp = tmp->next;
 		}

@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/07 18:02:32 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 11:21:53 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,18 @@ void	join_tokens(t_tokenizer *token)
 	{
 		if (tmp->joinable == 1)
 		{
-			if (*tmp->stat == INDQUOTES)
-			{
-				*tmp->stat = INDQUOTES;
-				tmp->token = ft_strjoin(tmp->token, tmp->next->token);
-			}
-			else if (*tmp->stat == INQUOTES)
+			if (*tmp->next->stat == INQUOTES)
 			{
 				*tmp->stat = INQUOTES;
 				tmp->token = ft_strjoin(tmp->token, tmp->next->token);
+				tmp->next = tmp->next->next;
 			}
-			tmp->next = tmp->next->next;
+			else if (*tmp->next->stat == INDQUOTES)
+			{
+				*tmp->stat = INDQUOTES;
+				tmp->token = ft_strjoin(tmp->token, tmp->next->token);
+				tmp->next = tmp->next->next;
+			}
 		}
 		tmp = tmp->next;
 	}

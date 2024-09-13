@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 19:54:39 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 11:51:39 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,19 @@ void	handle_non_word_token(t_tokenizer **tmp, t_cmd *new, int *j)
 	*tmp = (*tmp)->next;
 }
 
+void	print_cmd(t_cmd *cmd)
+{
+	t_cmd *tmp;
+
+	tmp = cmd;
+	while (tmp)
+	{
+		for (int i = 0; tmp->cmd[i]; i++)
+			printf("%s\n", tmp->cmd[i]);
+		tmp = tmp->next;
+	}
+}
+
 void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 {
 	t_cmd		*new;
@@ -86,4 +99,5 @@ void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 		if (tmp && tmp->next)
 			tmp = tmp->next;
 	}
+	// print_cmd(*cmd);
 }

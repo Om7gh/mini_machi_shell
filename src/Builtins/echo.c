@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/01 18:49:31 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/13 11:22:45 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ char	**check_args(char **cmd, int *count)
 	i = 1;
 	while (cmd[i])
 	{
-		j = 1;
-		if (cmd[i][0] == '-')
+		j = 2;
+		if (cmd[i][0] == '-' && cmd[i][1] == 'n')
 		{
 			while (cmd[i][j] && cmd[i][j] == 'n')
 				j++;
